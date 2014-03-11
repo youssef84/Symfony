@@ -135,6 +135,27 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/blog')) {
+            // ytdemo_accueil
+            if ($pathinfo === '/blog') {
+                return array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::indexAction',  '_route' => 'ytdemo_accueil',);
+            }
+
+            if (0 === strpos($pathinfo, '/blog/a')) {
+                // ytdemo_voir
+                if (0 === strpos($pathinfo, '/blog/article') && preg_match('#^/blog/article/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'ytdemo_voir')), array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::voirAction',));
+                }
+
+                // ytdemo_ajouter
+                if ($pathinfo === '/blog/ajouter') {
+                    return array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::ajouterAction',  '_route' => 'ytdemo_ajouter',);
+                }
+
+            }
+
+        }
+
         // _welcome
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
