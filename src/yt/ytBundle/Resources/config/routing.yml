@@ -1,0 +1,27 @@
+ytdemo_accueil:
+    path:     /{page}
+    defaults: { _controller: ytTestBundle:Demo:index, page:1}
+    requirements:
+        page: \d*
+        
+ytdemo_voir:
+    path:     /article/{id}
+    defaults: { _controller: ytTestBundle:Demo:voir}
+    requirements:
+        id: \d+
+        
+ytdemo_ajouter:
+    path:     /ajouter
+    defaults: { _controller: ytTestBundle:Demo:ajouter}
+    
+ytdemo_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: ytTestBundle:Demo:modifier}
+    requirements:
+        id: \d+
+        
+ytdemo_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: ytTestBundle:Demo:supprimer}
+    requirements:
+        id: \d+
