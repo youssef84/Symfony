@@ -137,13 +137,13 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         if (0 === strpos($pathinfo, '/blog')) {
             // ytdemo_accueil
-            if ($pathinfo === '/blog') {
-                return array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::indexAction',  '_route' => 'ytdemo_accueil',);
+            if (preg_match('#^/blog(?:/(?P<page>\\d*))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ytdemo_accueil')), array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::indexAction',  'page' => 1,));
             }
 
             if (0 === strpos($pathinfo, '/blog/a')) {
                 // ytdemo_voir
-                if (0 === strpos($pathinfo, '/blog/article') && preg_match('#^/blog/article/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/blog/article') && preg_match('#^/blog/article/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'ytdemo_voir')), array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::voirAction',));
                 }
 
@@ -152,6 +152,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::ajouterAction',  '_route' => 'ytdemo_ajouter',);
                 }
 
+            }
+
+            // ytdemo_modifier
+            if (0 === strpos($pathinfo, '/blog/modifier') && preg_match('#^/blog/modifier/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ytdemo_modifier')), array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::modifierAction',));
+            }
+
+            // ytdemo_supprimer
+            if (0 === strpos($pathinfo, '/blog/supprimer') && preg_match('#^/blog/supprimer/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ytdemo_supprimer')), array (  '_controller' => 'yt\\ytBundle\\Controller\\DemoController::supprimerAction',));
             }
 
         }
