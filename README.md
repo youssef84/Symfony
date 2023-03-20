@@ -1,6 +1,7 @@
 Symfony Standard Edition
 ========================
 
+
 Welcome to the Symfony Standard Edition - a fully-functional Symfony2
 application that you can use as the skeleton for your new applications.
 
@@ -10,6 +11,7 @@ chapter of the Symfony Documentation.
 
 1) Installing the Standard Edition
 ----------------------------------
+
 
 When it comes to installing the Symfony Standard Edition, you have the
 following options.
